@@ -131,7 +131,7 @@ app.get('/listings/:id', protected, wrapAsync(async (req, res)=>{
     );
     const location = listing.location;
     const {lat, lon} = await getCoordinates(location);
-    if(listing.owner.equals(user._id)) {
+    if (listing.owner && listing.owner.equals(user._id)) {
         res.locals.validUser = user;
     } else {
         res.locals.validUser = null;
