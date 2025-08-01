@@ -6,8 +6,7 @@
 
 ## 🔗 Live Demo
 
-[🌐 Visit Live](https://your-deployment-url.com)  
-*(Replace with your deployed Render/Vercel URL)*
+[🌐 Visit Live](https://wanderlust-1-o5jj.onrender.com)  
 
 ---
 
