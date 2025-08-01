@@ -1,0 +1,62 @@
+<% layout('/layouts/boilerplate') %>
+    <body>
+        <br><br>
+        <div class="col-8 offset-2">
+            <h2>Edit This Listing</h2>
+            <form action="/listings/<%=data._id%>?_method=PUT" method="post" class="create-form needs-validation" novalidate enctype="multipart/form-data">
+                <div class="inp">
+                    <label for="title" class="form-label">Title</label>
+                    <input type="text" value="<%=data.title%>" name="title" class="form-control" required>
+                    <div class="invalid-feedback">
+                        title required
+                    </div>
+                </div>
+                
+                <div class="inp">
+                    <label for="description" class="form-label">Description</label>
+                    <textarea type="text" name="description" class="form-control" required><%=data.description%></textarea>
+                    <div class="invalid-feedback">
+                        Please enter a short description
+                    </div>
+                </div>
+
+                <div class="inp">
+                    <img src="<%= originalImageUrl %>" alt="imageUrl">
+                </div>
+
+                <div class="inp">
+                    <label for="image" class="form-label">Upload New Image</label>
+                    <input type="file" name="image" class="form-control">
+                </div>
+                
+                <div class="row">
+                    <div class="col-md-4">
+                        <label for="price" class="form-label">Price</label>
+                        <input type="text" name="price" value="<%=data.price%>" class="form-control" required>
+                        <div class="invalid-feedback">
+                            Price should be valid
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-8">
+                        <label for="location" class="form-label">location</label>
+                        <input type="text" name="location" value="<%=data.location%>" class="form-control" required>
+                        <div class="invalid-feedback">
+                            Location should be valid
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="inp">
+                    <label for="country" class="form-label">Country</label>
+                    <input type="text" name="country" value="<%=data.country%>" class="form-control" required>
+                    <div class="invalid-feedback">
+                        Country should be valid
+                    </div>
+                </div>
+        
+                <button class="btn btn-pstv">Edit</button>
+            </form>
+        </div>
+        <br><br>
+    </body>

@@ -1,0 +1,67 @@
+<style>
+  .navbar-collapse {
+    background-color: white !important;
+    padding: 15px;
+    border-radius: 10px 10px 10px 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+  .btn-outline-success {
+    background-color: #fe424d;
+    color: white;
+    border: none;
+    border-radius: 25px;
+
+    &:hover {
+      background-color: #fe424d;
+      color: white;
+      border: none;
+      border-radius: 25px;
+    }
+  }
+  .btn-outline-success i {
+    margin-right: 0.5rem;
+  }
+  #search-bar {
+    border-radius: 25px;
+    padding: 0.5rem 2.5rem 0.5rem 1.5rem;
+  }
+</style>
+<nav class="navbar navbar-expand-lg bg-body-light sticky-top">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/listings"><i class="fa-regular fa-compass"></i></a>
+    <button class="navbar-toggler" type="button" id="navToggler" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <a class="nav-link" href="/listings">Explore</a>
+      </div>
+      <div class="navbar-nav ms-auto">
+        <form class="d-flex" role="search" id="search" action="/listings">
+          <input class="form-control me-2" type="search" placeholder="Search Destination" aria-label="Search" id="search-bar" name="q"/>
+          <button class="btn btn-outline-success" type="submit"><i class="fa-solid fa-magnifying-glass" style="display: inline;"></i>Search</button>
+        </form>
+      </div>
+      <div class="navbar-nav ms-auto">
+        <a class="nav-link" href="/listings/new">Airbnb your home</a>
+        <% if (!currUser) { %>
+          <a class="nav-link" href="/signup"><b>Sign Up</b></a>
+          <a class="nav-link" href="/login"><b>Log In</b></a>
+        <% } else { %>
+          <a class="nav-link" href="/logout"><b>Log Out</b></a>
+        <% } %>
+    </div>
+  </div>
+</nav>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const navToggler = document.querySelector(".navbar-toggler");
+    const searchBar = document.querySelector("#search");
+
+    if (navToggler && searchBar) {
+      navToggler.addEventListener("click", () => {
+        searchBar.classList.toggle("d-none");
+      });
+    }
+  });
+</script>

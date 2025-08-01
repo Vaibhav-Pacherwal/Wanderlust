@@ -1,0 +1,107 @@
+<% layout('/layouts/boilerplate') %>
+    <body>
+        <br>
+        <div class="container mt-4">
+            <div class="row justify-content-center">
+                <div class="col-12 col-md-8">
+                <h2 class="text-center"><%=listing.title%></h2>
+
+                <div class="card listing-card mb-4">
+                    <img src="<%=listing.image.url%>" class="card-img-top img-fluid" alt="listing-image">
+                    <div class="card-body">
+                    <p class="card-text">
+                        <i>@<%=listing.owner.username%></i><br><br>
+                        <%=listing.description%><br><br>
+                        &#8377;<%=listing.price.toLocaleString('en-IN')%> / night<br><br>
+                        <%=listing.location%><br>
+                        <%=listing.country%><br>
+                    </p>
+                    </div>
+                </div>
+
+                <% if(validUser) { %>
+                    <div class="d-flex justify-content-between mb-3">
+                    <form action="/listings/<%=listing._id%>/edit">
+                        <button class="btn btn-pstv">Edit</button>
+                    </form>
+                    <form action="/listings/<%=listing._id%>?_method=DELETE" method="post">
+                        <button class="btn btn-outline-dark bg-dark text-white">Delete</button>
+                    </form>
+                    </div>
+                <% } %>
+
+                <hr class="w-100 w-md-75 mx-auto">
+                <div>
+                    <h4>Leave a Review</h4>
+                    <form action="/listings/<%=listing._id%>/review" method="post" class="mb-3 mt-3 needs-validation" novalidate>
+                        <label for="rating">Rating</label><br>
+                        <fieldset class="starability-slot">
+                            <input type="radio" id="no-rate1" class="input-no-rate" name="review[rating]" value="1" checked aria-label="No rating." />
+                            <input type="radio" id="first-rate1" name="review[rating]" value="1" />
+                            <label for="first-rate1" title="Terrible">1 star</label>
+                            <input type="radio" id="first-rate2" name="review[rating]" value="2" />
+                            <label for="first-rate2" title="Not good">2 stars</label>
+                            <input type="radio" id="first-rate3" name="review[rating]" value="3" />
+                            <label for="first-rate3" title="Average">3 stars</label>
+                            <input type="radio" id="first-rate4" name="review[rating]" value="4" />
+                            <label for="first-rate4" title="Very good">4 stars</label>
+                            <input type="radio" id="first-rate5" name="review[rating]" value="5" />
+                            <label for="first-rate5" title="Amazing">5 stars</label>
+                        </fieldset>
+                        <div>
+                            <label for="comment" class="form-label">Comment</label>
+                            <textarea 
+                            placeholder="Add Review Here..." 
+                            id="comment" name="review[comment]" 
+                            rows="5" class="form-control w-100"
+                            required></textarea>
+                            <div class="invalid-feedback">Please Add Comment for Review</div>
+                            <br>
+                        </div>
+                        <button class="btn btn-outline-dark">
+                            Submit
+                        </button>
+                    </form>
+                </div>
+                <% if(reviews.length !== 0) { %>
+                    <hr class="w-100 w-md-75 mx-auto">
+                    <h4>All Reviews</h4>
+                    <div class="row g-3 justify-content-center">
+                        <% for(review of reviews) { %>
+                            <div class="card col-12 col-md-5 col-lg-3 mb-3 ms-md-3 p-3">
+                                <div class="card-body">
+                                    <h5 class="card-title"><i>@<%= review.author.username %></i></h5>
+                                    <p class="starability-result card-text" data-rating="<%= review.rating %>"></p>
+                                    <p class="card-text"><%= review.comment %></p>
+                                    <form action="/listings/<%= listing._id %>/review/<%= review._id %>?_method=DELETE" method="post">
+                                        <button class="btn btn-dark">Delete</button>
+                                    </form>
+                                </div>
+                            </div>
+                        <% } %>
+                    </div>
+                <% } %>
+                <hr class="w-100 w-md-75 mx-auto">
+                <h4>Where you'll be</h4>
+            </div>
+        </div>
+        <div id="map" style="height: 400px;"></div>
+        <br>
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+        <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+        <script>
+            const latitude = parseFloat("<%= lat %>");
+            const longitude = parseFloat("<%= lon %>");
+            console.log(latitude, "..", longitude);
+
+            const map = L.map('map').setView([latitude, longitude], 13);
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+            const customIcon = L.icon({
+                iconUrl: '/images/placeholder.png',
+                iconSize: [38, 38],              
+                iconAnchor: [19, 38],           
+                popupAnchor: [0, -38]         
+            });
+            L.marker([latitude, longitude], { icon: customIcon }).addTo(map).bindPopup("<%= listing.title %>").openPopup();
+        </script>
+    </body>
