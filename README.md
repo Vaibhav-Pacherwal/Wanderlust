@@ -6,7 +6,7 @@
 
 ## 🔗 Live Demo
 
-[🌐 Visit Live](https://wanderlust-1-o5jj.onrender.com)  
+[🌐 Visit Wanderlust](https://wanderlust-1-o5jj.onrender.com)  
 
 ---
 
