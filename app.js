@@ -93,7 +93,7 @@ app.use(wrapAsync(async (req, res, next)=>{
 }));
 
 app.get('/', (req, res)=>{
-    res.send(`Hi, Welcome to Wanderlust!`)
+    res.redirect("/listings");
 })
 
 app.get('/listings', wrapAsync(async (req, res)=>{
