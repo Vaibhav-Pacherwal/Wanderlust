@@ -1,4 +1,4 @@
-# 🌍 Wanderlust — Airbnb-Type Web App
+# 🌍 Wanderlust
 
 **Wanderlust** is a custom-built, full-stack Airbnb-style web application that allows users to create, browse, and book room listings across different locations. It uses **JWT-based authentication**, supports image uploads, and integrates **Leaflet maps with Nominatim geocoding** for location-aware listings.
 
